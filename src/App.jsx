@@ -3,16 +3,26 @@ import UserCard from "./components/UserCard";
 import axios from "axios";
 
 export default function App() {
-  
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState();
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const createUser = () => {
+    console.log("Creating user...");
+    console.log('user created...');
+    setIsCreated(true);
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        console.log("response", response);
         setUserList(response.data);
       } catch (error) {
-        console.error("Error fetching users:", error);
+        setErrorMsg("Something went wrong...");
+        console.error("Error fetching users:");
       }
     };
     fetchUsers();
@@ -20,8 +30,12 @@ export default function App() {
 
   return (
     <>
-      {userList.map((user, index) => (
-        <UserCard key={index} user={user} />
+      <p>{errorMsg}</p>
+      <button 
+        onClick={createUser}
+      >Create User</button>
+      {userList?.map((user) => (
+        <UserCard key={user.id} user={user} />
       ))}
     </>
   );
