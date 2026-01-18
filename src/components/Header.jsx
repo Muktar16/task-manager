@@ -1,27 +1,15 @@
-export function Header() {
+
+
+export default function Header({ cartCount }) {
+  return <h2>Cart Items: {cartCount}</h2>;
+}
+
+export function ProductCard({ onAddToCart }) {
   return (
-    <div
-      style={{
-        backgroundColor: "blue",
-        width: "100%",
-        height: "50px",
-        color: "white",
-        padding: "10px",
-      }}
-    >
-      <ul
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          listStyle: "none",
-          padding: "0",
-          margin: "0",
-        }}
-      >
-        <li style={{ marginRight: "10px" }}>Home</li>
-        <li style={{ marginRight: "10px" }}>About</li>
-        <li style={{ marginRight: "10px" }}>Contact</li>
-      </ul>
+    <div>
+      <h3>iPhone 15</h3>
+      <button onClick={onAddToCart}>Add to Cart</button>
     </div>
   );
 }
+
